@@ -5,67 +5,62 @@ import java.util.Scanner;
 public class Main {
 
     public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
 	Computer randomNumberDraw = new Computer(1,10);
-        Scanner scanner = new Scanner(System.in);
-        Statistics statistics = new Statistics();
+    Statistics statistics = new Statistics();
+    Game game = new Game();
+    Menu menu = new Menu();
+    User player = new User();
 
-        int iterator = 1;
+        int iterator = 0;
         int winCount = 0;
-        short userOption = -1;
+        int wrongInput = 0;
+        player.setUserChoice((short) -1);
         do {
-            System.out.println("***NUMBER QUIZ***");
-            System.out.println("Please select an option:");
-            System.out.println("1 - play game");
-            System.out.println("2 - actual statistics");
-            System.out.println("3 - exit");
-            userOption = scanner.nextShort();
-            switch (userOption) {
+            menu.showMenu();
+            player.setUserChoice(scanner.nextShort());
+            player.userWrongMenuChoiceNotification(1,3);
+
+            switch (player.getUserChoice()) {
                 case 1:
                 {
                     statistics.setNewNumberOfPlays(iterator);
+                    menu.showInputNotification(randomNumberDraw.getLowerBorder(),randomNumberDraw.getHigherBorder());
+                    player.setUserInput(scanner.nextInt());
 
-                    System.out.println("Enter integer number between "+ randomNumberDraw.getLowerBorder() + " and "+ randomNumberDraw.getHigherBorder() +
-                            " (inclusively):");
-                    int inputNumber = scanner.nextInt();
-
-                    if (inputNumber < randomNumberDraw.getLowerBorder() || inputNumber>randomNumberDraw.getHigherBorder()) {
-                        System.out.println("ERROR! Incorrect input. Try again.");
+                    boolean isTrue = menu.checkPlayerInput(player.getUserInput(),randomNumberDraw.getLowerBorder(),
+                            randomNumberDraw.getHigherBorder());
+                    if(!isTrue){
+                        wrongInput++;
+                        statistics.setNewNumberOfWrongInputs(wrongInput);
+                        menu.checkPlayerInputNotification();
                         break;
                     } else {
-                        User player = new User(inputNumber);
-                        int randomNumber = randomNumberDraw.computer();
-                        Game game = new Game(inputNumber,randomNumber);
-
-                        System.out.println("RESULT:");
-                        if (game.resultOfTheGame()) {
-                            System.out.println("This is correct number. You win.");
-                            System.out.println("Your choose: " + player.getSelectedNumber() + " ,computer choose: " + randomNumber);
+                        game.setComputerNumber(randomNumberDraw.computer());
+                        game.setUserNumber(player.getUserInput());
+                        if(game.resultOfTheGame()) {
                             winCount++;
                             statistics.setNewNumberOfWins(winCount);
-                        } else {
-                            System.out.println("You loose.");
-                            System.out.println("Your choose: " + player.getSelectedNumber() + " ,computer choose: " + randomNumber);
                         }
+                        game.showResultOfTheGame();
                     }
                     iterator++;
                 }
                     break;
+
                 case 2:
                 {
-                    System.out.println("YOUR ACTUAL RESULT!");
-                    System.out.println("Number of all games: " + statistics.getNumberOfPlays());
-                    System.out.println("Number of wins: " + statistics.getNumberOfWins());
+                    menu.showActualStatisticNotification();
+                    statistics.showStatistics();
                 }
+
                 case 3:
                     break;
 
             }
 
-        } while ((userOption != 3));
-        System.out.println("YOUR RESULT AFTER END GAME!");
-        System.out.println("Number of all games: " + statistics.getNumberOfPlays());
-        System.out.println("Number of wins: " + statistics.getNumberOfWins());
-
-
+        } while ((player.getUserChoice() != 3));
+        menu.showFinalStatisticNotification();
+        statistics.showStatistics();
     }
 }
