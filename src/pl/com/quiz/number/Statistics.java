@@ -3,7 +3,7 @@ package pl.com.quiz.number;
 public class Statistics {
     private int numberOfPlays;
     private int numberOfWins;
-    private int wrongInputs;
+    private int numberOfWrongInputs;
 
     public Statistics() {
 
@@ -17,8 +17,8 @@ public class Statistics {
         return numberOfWins;
     }
 
-    public int getWrongInputs() {
-        return wrongInputs;
+    public int getNumberOfWrongInputs() {
+        return numberOfWrongInputs;
     }
 
     public void setNewNumberOfPlays(int newNumberOfPlays) {
@@ -30,14 +30,7 @@ public class Statistics {
     }
 
     public void setNewNumberOfWrongInputs(int newNumberOfWrongInputs) {
-        wrongInputs = newNumberOfWrongInputs;
-    }
-
-    void showStatistics() {
-
-        System.out.println("Number of all games: " + getNumberOfPlays());
-        System.out.println("Number of wins: " + getNumberOfWins());
-        System.out.println("Number of wrong inputs: " + getWrongInputs());
+        numberOfWrongInputs = newNumberOfWrongInputs;
     }
 
 }

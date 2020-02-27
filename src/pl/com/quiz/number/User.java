@@ -1,31 +1,28 @@
 package pl.com.quiz.number;
 
 public class User {
-    private short userChoice;
-    private int userInput;
+    private short useMenuChoice;
+    private int userNumberInput;
 
     public User() {
 
     }
-    public void setUserChoice(short userChoice) {
-        this.userChoice = userChoice;
+    public void setUseMenuChoice(short useMenuChoice) {
+        this.useMenuChoice = useMenuChoice;
     }
 
-    public void setUserInput(int userInput) {
-        this.userInput = userInput;
+    public void setUserNumberInput(int userNumberInput) {
+        this.userNumberInput = userNumberInput;
     }
 
-    public short getUserChoice() {
-        return userChoice;
+    public short getUseMenuChoice() {
+        return useMenuChoice;
     }
 
-    public int getUserInput() {
-        return userInput;
+    public int getUserNumberInput() {
+        return userNumberInput;
     }
 
-    public void userWrongMenuChoiceNotification(int firstMenuOption, int lastMenuOption) {
-        if(userChoice<firstMenuOption || userChoice>lastMenuOption){
-            System.out.println("Error! Wrong option. Try again!");
-        }
+
     }
-}
+

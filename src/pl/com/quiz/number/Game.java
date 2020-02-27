@@ -1,40 +1,36 @@
 package pl.com.quiz.number;
 
 public class Game{
-    private int userNumber;
-    private int computerNumber;
+    private int userChoiceNumber;
+    private int computerGeneratedNumber;
 
     public Game() {
     }
 
-    public int getUserNumber() {
-        return userNumber;
+    public int getUserChoiceNumber() {
+        return userChoiceNumber;
     }
 
-    public void setUserNumber(int userNumber) {
-        this.userNumber = userNumber;
+    public void setUserChoiceNumber(int userChoiceNumber) {
+        this.userChoiceNumber = userChoiceNumber;
     }
 
-    public int getComputerNumber() {
-        return computerNumber;
+    public int getComputerGeneratedNumber() {
+        return computerGeneratedNumber;
     }
 
-    public void setComputerNumber(int computerNumber) {
-        this.computerNumber = computerNumber;
+    public void setComputerGeneratedNumber(int computerGeneratedNumber) {
+        this.computerGeneratedNumber = computerGeneratedNumber;
     }
 
     public boolean resultOfTheGame() {
-        return userNumber == computerNumber;
+        return userChoiceNumber == computerGeneratedNumber;
 
     }
 
-    public void showResultOfTheGame(){
-        System.out.println("RESULT:");
-        if (resultOfTheGame()) {
-            System.out.println("This is correct number. You win.");
-        } else {
-            System.out.println("You loose.");
-        }
-        System.out.println("Your choose: " + userNumber + " ,computer choose: " + computerNumber);
+    public boolean checkPlayerNumberInput(int playerInput, int startBorder, int endBorder) {
+        return playerInput >= startBorder && playerInput <= endBorder;
     }
+
+
 }
